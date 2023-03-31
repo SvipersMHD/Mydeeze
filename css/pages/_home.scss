@@ -48,13 +48,13 @@ body {
 .input__wrapper {
    height: 100vh;
    text-align: center;
-   background: url(../../img/equalizer-153212_1280.png) no-repeat center/cover;
+   background: url(../img/equalizer-153212_1280.png) no-repeat center/cover;
    transition: .3s all ease-in-out;
    position: relative;
    
    &::after {
       content: "";
-      background: #00000060;
+      background: #00000071;
       position: absolute;
       top: 50%;
       left: 50%;

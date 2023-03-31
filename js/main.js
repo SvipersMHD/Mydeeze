@@ -4,16 +4,15 @@ var wrapper = document.querySelector('.recherche__wrapper')
 var wrapperSearch = document.querySelector('.input__wrapper')
 
 
-function chercher(){
-   var inputValue = input.value
-   wrapper.innerHTML = ""
+function chercher() {
+   var inputValue = input.value;
+   wrapper.innerHTML = "";
 
-   if(input.value != ""){
-      wrapperSearch.style.height = "30vh"
-      wrapper.style.display = "grid"
-      input.classList.remove("attention")
-   
-      
+   if(input.value != "") {
+      wrapperSearch.style.height = "30vh";
+      wrapper.style.display = "grid";
+      input.classList.remove("attention");
+
       const options = {
          method: 'GET',
          headers: {
@@ -21,40 +20,40 @@ function chercher(){
             'X-RapidAPI-Host': 'deezerdevs-deezer.p.rapidapi.com'
          }
       };
+
       fetch(`https://deezerdevs-deezer.p.rapidapi.com/search?q=${inputValue}`, options)
       .then(response => response.json())
       .then(response => {
-         console.log(response)
-         for (var i = 0 ; i < 25 ; i++){
-            var rechercherInfo = 
-            `
-            <div class="recherche"  style="background: url(${response.data[i].album.cover})no-repeat center/cover;">
-            <div class="artiste">Artiste : ${response.data[i].artist.name}</div>
-            <div class="Titre">Titre : ${response.data[i].title} (${(response.data[i].duration/60).toFixed(2).replace(".", "min")})</div>
-            <div class="img">
-            <img src="${response.data[i].album.cover}" alt="">
-            </div>
-            <audio controls src="${response.data[i].preview}"></audio>
-            </div>
-            `
-            wrapper.innerHTML += rechercherInfo
+         console.log(response);
+
+         if (response.data.length === 0) {
+            // Afficher le message d'erreur
+            wrapper.innerHTML = "<p>Nous n'avons pas trouvé d'artiste ou de musique correspondant à votre recherche.</p>";
+         } else {
+            for (var i = 0 ; i < 24 ; i++){
+               var rechercherInfo = 
+               `
+               <div class="recherche"  style="background: url(${response.data[i].album.cover_xl})no-repeat center/cover;">
+               <div class="artiste">Artiste : ${response.data[i].artist.name}</div>
+               <div class="Titre">Titre : ${response.data[i].title} (${(response.data[i].duration/60).toFixed(2).replace(".", "min")})</div>
+               <div class="img">
+               <img src="${response.data[i].album.cover}" alt="">
+               </div>
+               <audio controls src="${response.data[i].preview}"></audio>
+               </div>
+               `
+               wrapper.innerHTML += rechercherInfo;
+            }
          }
       })
       .catch(err => console.error(err));
-      
-      input.value = ""
+
+      input.value = "";
    }
    else {
-      input.classList.add("attention")
+      input.classList.add("attention");
    }
 }
-
-
-
-
-
-
-
 
 
 /////lancer la fonction de recherche/////
