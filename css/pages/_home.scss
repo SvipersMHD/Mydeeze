@@ -6,8 +6,9 @@ body {
       display: none;
       width: 80%;
       margin: 0 auto;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 10px   ;
+      grid-template-columns: repeat(auto-fit, minmax(200px, calc(100%/5)));
+      justify-content: center;
+      gap: 10px;
       
       .recherche {
          display: flex;
@@ -66,7 +67,7 @@ body {
    h1 {
       margin: 0;
       color: white;
-      padding: 25px 0;
+      padding: 25px 10px;
       position: relative;
       z-index: 10;
    }

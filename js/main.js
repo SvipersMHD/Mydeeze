@@ -9,7 +9,7 @@ function chercher() {
    wrapper.innerHTML = "";
 
    if(input.value != "") {
-      wrapperSearch.style.height = "30vh";
+      wrapperSearch.style.height = "50vh";
       wrapper.style.display = "grid";
       input.classList.remove("attention");
 
